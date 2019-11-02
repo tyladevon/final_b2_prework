@@ -1,0 +1,9 @@
+<h1><%= @course.name %></h1>
+
+<section>
+  <ul>
+    <% @course.student_grades.each do |course_student| %>
+    <p class="student-info"><%= course_student.student.name %> <%= course_student.grade %></p>
+    <% end %>
+  </ul>
+</section>
