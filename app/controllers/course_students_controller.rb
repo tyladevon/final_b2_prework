@@ -9,8 +9,8 @@ class CourseStudentsController < ApplicationController
   end
 
   def destroy
-    course_student = CourseStudent.find(:id)
-    course_student.destroy
+    student = Student.find(:id)
+    CourseStudent.destroy
     redirect_to "/students/#{student.id}"
   end
 
