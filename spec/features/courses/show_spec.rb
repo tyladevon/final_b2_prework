@@ -1,8 +1,5 @@
 require 'rails_helper'
 
-# - the course's name
-# - each student in the course listed in order from highest grade to lowest grade
-
 RSpec.describe "As a user" do
   context "When I visit a course show page" do
     before(:each) do
