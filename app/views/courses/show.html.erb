@@ -4,7 +4,7 @@
   <ul>
     <% @course.student_grades.each do |course_student| %>
     <p class="student-info"><%= course_student.student.name %> <%= course_student.grade %></p>
-    <p><%= button_to "unenroll", "/course_students/#{course_student.id}", method: :delete %></p>
+    <p><%= button_to "unenroll", "/course_students/#{student.id}", method: :delete %></p>
     <% end %>
   </ul>
 </section>
