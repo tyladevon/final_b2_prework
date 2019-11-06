@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20191101154336) do
   create_table "course_students", force: :cascade do |t|
     t.bigint "course_id"
     t.bigint "student_id"
-    t.float "grade", default: nil
+    t.float "grade", default: 0.0
     t.index ["course_id"], name: "index_course_students_on_course_id"
     t.index ["student_id"], name: "index_course_students_on_student_id"
   end

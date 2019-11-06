@@ -26,12 +26,13 @@ RSpec.describe "As a user" do
     end
 
     it "I see a form to enroll a new student in this course" do
-
       fill_in :name, with: "Molly"
       click_on "Enroll"
 
       student = Student.last
       expect(current_path).to eq("/students/#{student.id}")
+      expect(page).to have_content("Name: Molly")
+      expect(page).to have_content("Course and Grade: Math, 0")
     end
   end
 end

@@ -3,14 +3,16 @@ class CourseStudentsController < ApplicationController
   def create
     student = Student.create(student_params)
     if student.save
-      CourseStudent.create(course_student_params)
+      CourseStudent.create(student_id: student.id, course_id: params[:course_id])
       redirect_to "/students/#{student.id}"
     end
   end
 
   def destroy
-    student = Student.find(:id)
-    CourseStudent.destroy
+    course_student = CourseStudent.find_by(course_student_params)
+    student = course_student.student
+    course_student.destroy
+
     redirect_to "/students/#{student.id}"
   end
 

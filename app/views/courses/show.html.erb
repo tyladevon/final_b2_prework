@@ -4,13 +4,13 @@
   <ul>
     <% @course.student_grades.each do |course_student| %>
     <p class="student-info"><%= course_student.student.name %> <%= course_student.grade %></p>
-    <p><%= button_to "unenroll", "/course_students/#{student.id}", method: :delete %></p>
+    <p><%= button_to "unenroll", "/courses/#{@course.id}/students/#{course_student.student.id}", method: :delete %></p>
     <% end %>
   </ul>
 </section>
 
 <section>
-  <%= form_tag "/course_students" do %>
+  <%= form_tag "/course_students/#{@course.id}" do %>
 
     <%= label_tag :name %>
     <%= text_field_tag :name %>
