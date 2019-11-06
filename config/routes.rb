@@ -6,4 +6,8 @@ resources :students, only:[:show]
 
 resources :courses, only:[:show]
 
+delete "/courses/:course_id/students/:student_id", to: "course_students#destroy"
+
+post "/course_students/:course_id", to: "course_students#create"
+
 end

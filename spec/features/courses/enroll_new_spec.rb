@@ -12,18 +12,10 @@ RSpec.describe "As a user" do
       @math = Course.create(
         name: "Math"
       )
-      @science = Course.create(
-        name: "Science"
-      )
       @luna_math = CourseStudent.create(
         course_id: @math.id,
         student_id: @luna_emmy.id,
         grade: 91.4
-      )
-      @luna_science = CourseStudent.create(
-        course_id: @science.id,
-        student_id: @luna_emmy.id,
-        grade: 93.7
       )
       @zadin_math = CourseStudent.create(
         course_id: @math.id,
@@ -33,13 +25,14 @@ RSpec.describe "As a user" do
       visit "/courses/#{@math.id}"
     end
 
-    it "I see course information" do
-      expect(page).to have_content(@math.name)
-    end
+    it "I see a form to enroll a new student in this course" do
+      fill_in :name, with: "Molly"
+      click_on "Enroll"
 
-    it "I can see students in each course in order of highest to lowest grades" do
-      expect(page.all('.student-info')[0]).to have_content(@zadin_kai.name)
-      expect(page.all('.student-info')[1]).to have_content(@luna_emmy.name)
+      student = Student.last
+      expect(current_path).to eq("/students/#{student.id}")
+      expect(page).to have_content("Name: Molly")
+      expect(page).to have_content("Course and Grade: Math, 0")
     end
   end
 end

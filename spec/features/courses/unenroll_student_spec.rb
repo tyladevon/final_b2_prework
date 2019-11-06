@@ -6,9 +6,6 @@ RSpec.describe "As a user" do
       @luna_emmy = Student.create(
         name: "Luna Emmy"
       )
-      @zadin_kai = Student.create(
-        name: "Zadin Kai"
-      )
       @math = Course.create(
         name: "Math"
       )
@@ -25,21 +22,15 @@ RSpec.describe "As a user" do
         student_id: @luna_emmy.id,
         grade: 93.7
       )
-      @zadin_math = CourseStudent.create(
-        course_id: @math.id,
-        student_id: @zadin_kai.id,
-        grade: 96.8
-      )
+
       visit "/courses/#{@math.id}"
     end
 
-    it "I see course information" do
-      expect(page).to have_content(@math.name)
-    end
-
-    it "I can see students in each course in order of highest to lowest grades" do
-      expect(page.all('.student-info')[0]).to have_content(@zadin_kai.name)
-      expect(page.all('.student-info')[1]).to have_content(@luna_emmy.name)
+    it "I see a button 'unenroll' next to each student's name" do
+      click_on 'unenroll'
+      expect(current_path).to eq("/students/#{@luna_emmy.id}")
+      expect(page).to have_content("Science")
+      expect(page).to_not have_content("Math")
     end
   end
 end
